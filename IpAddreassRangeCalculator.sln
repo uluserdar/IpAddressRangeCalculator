@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpAddreassRangeCalculator", "IpAddreassRangeCalculator\IpAddreassRangeCalculator.csproj", "{878BFCE3-21DA-48F4-97DA-8F04BF78D70E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IpAddreassRangeCalculator", "IpAddreassRangeCalculator\IpAddreassRangeCalculator.csproj", "{878BFCE3-21DA-48F4-97DA-8F04BF78D70E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net452", "Net452", "{048F5E08-1B35-45CB-A091-A396BC79F4A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpRangeCalculator", "IpRangeCalculator\IpRangeCalculator.csproj", "{1EAE37D3-7BAF-481B-AF19-E216F8EC65F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{878BFCE3-21DA-48F4-97DA-8F04BF78D70E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{878BFCE3-21DA-48F4-97DA-8F04BF78D70E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{878BFCE3-21DA-48F4-97DA-8F04BF78D70E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EAE37D3-7BAF-481B-AF19-E216F8EC65F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EAE37D3-7BAF-481B-AF19-E216F8EC65F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EAE37D3-7BAF-481B-AF19-E216F8EC65F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EAE37D3-7BAF-481B-AF19-E216F8EC65F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1EAE37D3-7BAF-481B-AF19-E216F8EC65F0} = {048F5E08-1B35-45CB-A091-A396BC79F4A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60623862-E7CE-453B-8FE0-B0C3C2636085}
