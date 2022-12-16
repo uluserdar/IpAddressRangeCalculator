@@ -1,4 +1,5 @@
-﻿using NetTools;
+﻿using IpRangeCalculator.Constants;
+using NetTools;
 using SimpleConsoleProgress;
 using System;
 using System.IO;
@@ -10,23 +11,53 @@ namespace IpRangeCalculator.Helpers
 {
     public static class CsvStringDataHelper
     {
-        public static async Task CreateIpAddressListAsync(this StringBuilder csvStringData, string fileName)
+        public static async Task IpAddressToCsv()
+        {
+            string[] lines = new string[0];
+            StringBuilder csvStringData = new StringBuilder();
+
+            string fileName;
+            while (true)
+            {
+                Console.WriteLine(ConsoleMessages.EnterFileName);
+                fileName = Console.ReadLine();
+
+                csvStringData.AppendLine($"{FieldNames.IpRange};{FieldNames.IpAddress}");
+                try
+                {
+                    await csvStringData.CreateIpAddressListAsync(fileName);
+                    await csvStringData.CreateCsvFileAsync(fileName);
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message);
+                    continue;
+                }
+
+                Console.WriteLine(ConsoleMessages.CsvFileCreated);
+                Console.WriteLine(ConsoleMessages.CloseProgram);
+                Console.ReadKey();
+                break;
+            }
+        }
+        static async Task CreateIpAddressListAsync(this StringBuilder csvStringData, string fileName)
         {
             await Task.Run(() =>
             {
                 string[] lines = new string[0];
                 if (File.Exists(fileName)) lines = File.ReadAllLines(fileName);
-                else throw new FileNotFoundException("File not found!");
-                Console.WriteLine($":Total IP Range {lines.Length}");
+                else throw new FileNotFoundException(ErrorMessages.FileNotFound);
+                Console.WriteLine(String.Format(ConsoleMessages.TotalIpRange, lines.Length));
                 for (int i = 0; i < lines.Length; i++)
                 {
                     IPAddressRange ipAddressRange = new IPAddressRange();
                     IPAddressRange.TryParse(lines[i], out ipAddressRange);
                     if (ipAddressRange != null)
                     {
-                        Console.WriteLine($"Processing IP range: {i+1}/{lines.Length}");
-                        Console.WriteLine($"IP Range: {ipAddressRange.ToCidrString()} - Start IP: {ipAddressRange.Begin} - End IP: {ipAddressRange.End}");
-                        Console.WriteLine($"{ipAddressRange.ToCidrString()} processing...");
+                        Console.WriteLine(String.Format(ConsoleMessages.ProcessingIpRange, i + 1, lines.Length));
+                        Console.WriteLine(String.Format(ConsoleMessages.IpRangeInfo, ipAddressRange.ToCidrString(), ipAddressRange.Begin, ipAddressRange.End));
+                        Console.WriteLine(String.Format(ConsoleMessages.Processing, ipAddressRange.ToCidrString()));
                         int ipAddressIndex = 0;
                         int ipAddressCount = ipAddressRange.AsEnumerable().Count();
                         foreach (var ipAddress in ipAddressRange)
@@ -38,12 +69,12 @@ namespace IpRangeCalculator.Helpers
                             Progress.Write(ipAddressIndex, ipAddressCount);
                             GC.Collect();
                         }
-                        Console.WriteLine($"{ipAddressRange.ToCidrString()} done");
+                        Console.WriteLine(String.Format(ConsoleMessages.Done, ipAddressRange.ToCidrString()));
                     }
                 }
             });
         }
-        public static async Task CreateCsvFileAsync(this StringBuilder csvStringData, string fileName)
+        static async Task CreateCsvFileAsync(this StringBuilder csvStringData, string fileName)
         {
             await Task.Run(() =>
             {

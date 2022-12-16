@@ -61,6 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\ConsoleMessages.cs" />
+    <Compile Include="Constants\ErrorMessages.cs" />
+    <Compile Include="Constants\FieldNames.cs" />
     <Compile Include="Helpers\CsvStringDataHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
